@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import {Box, Button, TextField, Typography} from '@mui/material';
 import PokeCard from './components/Pokecard';
 
 export default function App() {
@@ -18,7 +19,6 @@ export default function App() {
 
 			.then((response) => {
 				setData(response);
-				console.log(data);
 				setError(null);
 			})
 
@@ -38,7 +38,6 @@ export default function App() {
 		const rng = rng1.concat(rng2);
 		const rnd = Math.floor(Math.random() * 1154);
 		const api = `https://pokeapi.co/api/v2/pokemon/${rng[rnd]}`;
-		console.log(api);
 		fetchData(api);
 	};
 
@@ -50,44 +49,52 @@ export default function App() {
 		if (e.key === 'Enter' && e.target.value !== '') {
 			setInput(e.target.value);
 			const api = `https://pokeapi.co/api/v2/pokemon/${input.toLowerCase()}`;
-			console.log(api);
 			fetchData(api);
 		} else if (e.target.value === '') {
 			setError('Enter pokemon name or number');
 			setTimeout(() => {
 				setError(null);
-			}, 1500);
+			}, 2000);
 		}
 	};
 
 	return (
-		<div className='app'>
-			<h1 className='title'>The Pokedex Project</h1>
-			<button className='random-btn' onClick={handleClick}>
+		<Box className='app'>
+			<Typography variant='h3' className='title'>
+				The Pokedex Project
+			</Typography>
+			<Button
+				sx={{my: 3}}
+				variant='outlined'
+				className='random-btn'
+				onClick={handleClick}>
 				Pick random pokemon
-			</button>
-			<hr />
-			<input
+			</Button>
+			<TextField
 				className='search-bar'
-				type='text'
-				placeholder='or enter pokemon name/number...'
+				type='search'
+				label='Enter pokemon name/number'
 				onChange={handleChange}
 				onKeyDown={handleEnter}
 			/>
+			<Box>
+				{loading && (
+					<Typography variant='subtitle2'>Searching for pokemons</Typography>
+				)}
 
-			{loading && <h3>Searching for pokemons...</h3>}
-			{error && <div>{error}</div>}
+				{error && <Typography variant='subtitle2'>{error}</Typography>}
 
-			{data !== null && !loading && (
-				<PokeCard
-					key={data.id}
-					name={data.name}
-					height={data.height}
-					weight={data.weight}
-					front={data.sprites.front_default}
-					back={data.sprites.back_default}
-				/>
-			)}
-		</div>
+				{data !== null && !loading && (
+					<PokeCard
+						key={data.id}
+						name={data.name}
+						height={data.height}
+						weight={data.weight}
+						front={data.sprites.front_default}
+						back={data.sprites.back_default}
+					/>
+				)}
+			</Box>
+		</Box>
 	);
 }
