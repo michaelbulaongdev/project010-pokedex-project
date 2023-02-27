@@ -51,10 +51,7 @@ export default function App() {
 			const api = `https://pokeapi.co/api/v2/pokemon/${input.toLowerCase()}`;
 			fetchData(api);
 		} else if (e.target.value === '') {
-			setError('Enter pokemon name or number');
-			setTimeout(() => {
-				setError(null);
-			}, 2000);
+			setError(null);
 		}
 	};
 
@@ -63,36 +60,38 @@ export default function App() {
 			<Typography variant='h3' className='title'>
 				The Pokedex Project
 			</Typography>
-			<Button
-				sx={{my: 3}}
-				variant='outlined'
-				className='random-btn'
-				onClick={handleClick}>
-				Pick random pokemon
-			</Button>
-			<TextField
-				className='search-bar'
-				type='search'
-				label='Enter pokemon name/number'
-				onChange={handleChange}
-				onKeyDown={handleEnter}
-			/>
+			<Box sx={{display: 'flex', flexDirection: 'column'}}>
+				<Button
+					sx={{my: 3}}
+					variant='outlined'
+					size='large'
+					onClick={handleClick}>
+					Pick random pokemon
+				</Button>
+				<TextField
+					type='search'
+					label='Enter pokemon name/number'
+					onChange={handleChange}
+					onKeyDown={handleEnter}
+				/>
+			</Box>
 			<Box>
 				{loading && (
-					<Typography variant='subtitle2'>Searching for pokemons</Typography>
+					<Typography variant='subtitle2'>Enter pokemon name/number</Typography>
 				)}
 
 				{error && <Typography variant='subtitle2'>{error}</Typography>}
 
 				{data !== null && !loading && (
-					<PokeCard
-						key={data.id}
-						name={data.name}
-						height={data.height}
-						weight={data.weight}
-						front={data.sprites.front_default}
-						back={data.sprites.back_default}
-					/>
+					<Box mt={3}>
+						<PokeCard
+							key={data.id}
+							name={data.name}
+							height={data.height}
+							weight={data.weight}
+							image={data.sprites.front_default}
+						/>
+					</Box>
 				)}
 			</Box>
 		</Box>

@@ -6,12 +6,13 @@ export default function PokeCard(props) {
 			<CardContent>
 				<h2 className='poke-name'>{props.name.toUpperCase()}</h2>
 				<CardMedia className='img-container'>
-					<img className='sprite-img' src={props.front} alt='front' />
-					<img className='sprite-img' src={props.back} alt='back' />
+					<img className='sprite-img' src={props.image} alt='front' />
 				</CardMedia>
 				<CardContent className='stats-container'>
-					<Typography>Height: {props.height / 10} m</Typography>
-					<Typography>Weight: {props.weight / 10} kg</Typography>
+					<Typography variant='body1'>Height: {props.height / 10} m</Typography>
+					<Typography variant='body1'>
+						Weight: {props.weight / 10} kg
+					</Typography>
 				</CardContent>
 			</CardContent>
 		</Card>

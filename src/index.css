@@ -1,21 +1,25 @@
 @import url("https://fonts.googleapis.com/css2?family=Mali:wght@300&display=swap");
 
+:root {
+  --mainColor: #1976d2;
+}
+
 body {
-  background-color: lightslategray;
+  background-color: rgba(25, 118, 210, .4);
 }
 
 .body {
   max-width: 400px;
   margin: 30px auto;
   text-align: center;
-  color: #00adb5;
+  color: var(--mainColor);
 }
 .app {
   font-family: "Mali", cursive;
   background-color: floralwhite;
-  height: 650px;
+  min-height: 600px;
   padding: 50px;
-  border-radius: 20px;
+  border-radius: 10px;
 }
 
 .title {
@@ -23,37 +27,21 @@ body {
   font-weight: bold;
 }
 
-.random-btn {
-  font-family: "Mali", cursive;
-  font-size: 1rem;
-  font-weight: 700;
-  color: #00adb5;
-  border-radius: 5px;
-  border: none;
-  height: 2rem;
-  width: 100%;
-  cursor: pointer;
-}
-
-.search-bar {
-  text-align: center;
-  font-family: "Mali", cursive;
-  background-color: floralwhite;
-}
-
 .poke-name {
   font-size: 1.8rem;
+  color: var(--mainColor);
 }
 
 .img-container {
-  background-color: #eeeeee;
+  background-color: rgba(25, 118, 210, .1);
   border-radius: 10px;
 }
 
 .sprite-img {
-  min-width: 50%;
+  min-width: 60%;
 }
 
 .stats-container {
-  margin-top: 2rem;
+  margin-top: 1rem;
+  color: var(--mainColor);
 }
