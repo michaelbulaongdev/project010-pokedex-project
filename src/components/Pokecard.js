@@ -2,9 +2,11 @@ import {Card, CardContent, CardMedia, Typography} from '@mui/material';
 
 export default function PokeCard(props) {
 	return (
-		<Card className='card-container'>
+		<Card variant='outlined' className='card-container'>
 			<CardContent>
-				<h2 className='poke-name'>{props.name.toUpperCase()}</h2>
+				<h2 className='poke-name'>
+					{props.name.replace(/-/g, ' ').toUpperCase()}
+				</h2>
 				<CardMedia className='img-container'>
 					<img className='sprite-img' src={props.image} alt='front' />
 				</CardMedia>

@@ -82,11 +82,9 @@ export default function App() {
 				/>
 			</Box>
 			<Box mt={3}>
-				{loading && (
-					<Typography variant='subtitle2'>Catching pokemon...</Typography>
-				)}
+				{loading && <Typography variant='h6'>Catching pokemon...</Typography>}
 
-				{error && <Typography variant='subtitle2'>{error}</Typography>}
+				{error && <Typography variant='h6'>{error}</Typography>}
 
 				{data !== null && !loading && (
 					<PokeCard
