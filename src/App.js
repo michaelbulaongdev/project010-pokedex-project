@@ -20,7 +20,7 @@ export default function App() {
 			});
 
 			if (!response.ok) {
-				throw new Error(`Code ${response.status}: No such pokemon!`);
+				throw new Error(`Code ${response.status}: No pokemon found!`);
 			}
 
 			const result = await response.json();
@@ -52,6 +52,7 @@ export default function App() {
 	};
 
 	const handleEnter = (e) => {
+		setError(null);
 		if (e.key === 'Enter' && e.target.value !== '') {
 			setInput(e.target.value);
 			const api = `https://pokeapi.co/api/v2/pokemon/${input.toLowerCase()}`;
@@ -76,7 +77,7 @@ export default function App() {
 				</Button>
 				<TextField
 					type='search'
-					label='Enter pokemon name/number'
+					label='Enter pokemon name or number'
 					onChange={handleChange}
 					onKeyDown={handleEnter}
 				/>

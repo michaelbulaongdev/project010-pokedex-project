@@ -8,7 +8,11 @@ export default function PokeCard(props) {
 					{props.name.replace(/-/g, ' ').toUpperCase()}
 				</h2>
 				<CardMedia className='img-container'>
-					<img className='sprite-img' src={props.image} alt='front' />
+					<img
+						className='sprite-img'
+						src={props.image}
+						alt='pokemon profile pic'
+					/>
 				</CardMedia>
 				<CardContent className='stats-container'>
 					<Typography variant='body1'>Height: {props.height / 10} m</Typography>
