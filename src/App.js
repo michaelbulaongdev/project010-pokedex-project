@@ -10,7 +10,6 @@ export default function App() {
 
 	const fetchData = async (api) => {
 		setLoading(true);
-
 		try {
 			const response = await fetch(api, {
 				method: 'GET',
@@ -18,15 +17,10 @@ export default function App() {
 					Accept: 'application/json',
 				},
 			});
-
 			if (!response.ok) {
 				throw new Error(`Code ${response.status}: No pokemon found!`);
 			}
-
 			const result = await response.json();
-
-			console.log('result is: ', JSON.stringify(result, null, 4));
-
 			setData(result);
 			setError(null);
 		} catch (err) {
@@ -38,6 +32,7 @@ export default function App() {
 	};
 
 	const handleClick = () => {
+		setInput('');
 		setError(null);
 		const rng1 = Array.from({length: 905}, (_, i) => i + 1);
 		const rng2 = Array.from({length: 249}, (_, i) => i + 10001);
@@ -65,19 +60,20 @@ export default function App() {
 	return (
 		<Box className='app'>
 			<Typography variant='h3' className='title'>
-				The Pokedex Project
+				Pokedex Project
 			</Typography>
 			<Box sx={{display: 'flex', flexDirection: 'column'}}>
 				<Button
 					sx={{my: 3}}
-					variant='outlined'
+					variant='contained'
 					size='large'
 					onClick={handleClick}>
-					Pick random pokemon
+					find random pokemon
 				</Button>
 				<TextField
 					type='search'
 					label='Enter pokemon name or number'
+					value={input}
 					onChange={handleChange}
 					onKeyDown={handleEnter}
 				/>
