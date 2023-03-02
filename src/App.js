@@ -98,7 +98,12 @@ export default function App() {
 				/>
 			</Box>
 			<Box mt={3}>
-				{loading && <Typography variant='h6'>Catching pokemon...</Typography>}
+				{loading && (
+					<Box>
+						<Typography variant='h6'>Catching pokemon...</Typography>
+						<div id='html-spinner'></div>
+					</Box>
+				)}
 
 				{error && <Typography variant='h6'>{error}</Typography>}
 
