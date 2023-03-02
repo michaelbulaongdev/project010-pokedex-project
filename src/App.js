@@ -81,7 +81,7 @@ export default function App() {
 					onKeyDown={handleEnter}
 				/>
 			</Box>
-			<Box>
+			<Box mt={3}>
 				{loading && (
 					<Typography variant='subtitle2'>Catching pokemon...</Typography>
 				)}
@@ -89,15 +89,14 @@ export default function App() {
 				{error && <Typography variant='subtitle2'>{error}</Typography>}
 
 				{data !== null && !loading && (
-					<Box mt={3}>
-						<PokeCard
-							key={data.id}
-							name={data.name}
-							height={data.height}
-							weight={data.weight}
-							image={data.sprites.front_default}
-						/>
-					</Box>
+					<PokeCard
+						key={data.id}
+						name={data.name}
+						height={data.height}
+						weight={data.weight}
+						image={data.sprites.front_default}
+						loading={loading}
+					/>
 				)}
 			</Box>
 		</Box>
