@@ -8,11 +8,11 @@ export default function App() {
 	const [error, setError] = useState(null);
 	const [input, setInput] = useState('');
 
-	const fetchData = async () => {
+	const fetchData = async (api) => {
 		setLoading(true);
 
 		try {
-			const response = await fetch('https://reqres.in/api/users', {
+			const response = await fetch(api, {
 				method: 'GET',
 				headers: {
 					Accept: 'application/json',
@@ -20,7 +20,7 @@ export default function App() {
 			});
 
 			if (!response.ok) {
-				throw new Error(`Error! status: ${response.status}`);
+				throw new Error(`Code ${response.status}: No such pokemon!`);
 			}
 
 			const result = await response.json();
@@ -28,14 +28,17 @@ export default function App() {
 			console.log('result is: ', JSON.stringify(result, null, 4));
 
 			setData(result);
+			setError(null);
 		} catch (err) {
 			setError(err.message);
+			setData(null);
 		} finally {
 			setLoading(false);
 		}
 	};
 
 	const handleClick = () => {
+		setError(null);
 		const rng1 = Array.from({length: 905}, (_, i) => i + 1);
 		const rng2 = Array.from({length: 249}, (_, i) => i + 10001);
 		const rng = rng1.concat(rng2);
@@ -80,7 +83,7 @@ export default function App() {
 			</Box>
 			<Box>
 				{loading && (
-					<Typography variant='subtitle2'>Enter pokemon name/number</Typography>
+					<Typography variant='subtitle2'>Catching pokemon...</Typography>
 				)}
 
 				{error && <Typography variant='subtitle2'>{error}</Typography>}
