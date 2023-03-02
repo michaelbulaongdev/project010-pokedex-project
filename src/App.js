@@ -8,28 +8,31 @@ export default function App() {
 	const [error, setError] = useState(null);
 	const [input, setInput] = useState('');
 
-	const fetchData = (api) => {
-		fetch(api)
-			.then((response) => {
-				if (!response.ok) {
-					throw new Error(`No such pokemon: error ${response.status}`);
-				}
-				return response.json();
-			})
+	const fetchData = async () => {
+		setLoading(true);
 
-			.then((response) => {
-				setData(response);
-				setError(null);
-			})
-
-			.catch((err) => {
-				setError(err.message);
-				setData(null);
-			})
-
-			.finally(() => {
-				setLoading(false);
+		try {
+			const response = await fetch('https://reqres.in/api/users', {
+				method: 'GET',
+				headers: {
+					Accept: 'application/json',
+				},
 			});
+
+			if (!response.ok) {
+				throw new Error(`Error! status: ${response.status}`);
+			}
+
+			const result = await response.json();
+
+			console.log('result is: ', JSON.stringify(result, null, 4));
+
+			setData(result);
+		} catch (err) {
+			setError(err.message);
+		} finally {
+			setLoading(false);
+		}
 	};
 
 	const handleClick = () => {
