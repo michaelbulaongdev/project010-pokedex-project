@@ -109,7 +109,6 @@ export default function App() {
 						height={data.height}
 						weight={data.weight}
 						image={data.sprites.front_default}
-						loading={loading}
 					/>
 				)}
 			</Box>
