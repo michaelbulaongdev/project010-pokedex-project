@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import axios from 'axios';
 import {Box, Button, TextField, Typography} from '@mui/material';
 import PokeCard from './components/Pokecard';
 
@@ -8,30 +9,47 @@ export default function App() {
 	const [error, setError] = useState(null);
 	const [input, setInput] = useState('');
 
+	// const fetchData = async (api) => {
+	// 	setLoading(true);
+	// 	try {
+	// 		const response = await fetch(api, {
+	// 			method: 'GET',
+	// 			headers: {
+	// 				Accept: 'application/json',
+	// 			},
+	// 		});
+	// 		if (!response.ok) {
+	// 			throw new Error(`Code ${response.status}: No pokemon found!`);
+	// 		}
+	// 		const result = await response.json();
+	// 		setData(result);
+	// 		setError(null);
+	// 	} catch (err) {
+	// 		setError(err.message);
+	// 		setData(null);
+	// 	} finally {
+	// 		setLoading(false);
+	// 	}
+	// };
+
 	const fetchData = async (api) => {
 		setLoading(true);
 		try {
-			const response = await fetch(api, {
-				method: 'GET',
+			const {data} = await axios.get(api, {
 				headers: {
 					Accept: 'application/json',
 				},
 			});
-			if (!response.ok) {
-				throw new Error(`Code ${response.status}: No pokemon found!`);
-			}
-			const result = await response.json();
-			setData(result);
-			setError(null);
-		} catch (err) {
-			setError(err.message);
-			setData(null);
+			setData(data);
+		} catch (error) {
+			setError('No pokemon found!');
 		} finally {
 			setLoading(false);
 		}
 	};
 
 	const handleClick = () => {
+		setData(null);
 		setInput('');
 		setError(null);
 		const rng1 = Array.from({length: 905}, (_, i) => i + 1);
@@ -47,6 +65,7 @@ export default function App() {
 	};
 
 	const handleEnter = (e) => {
+		setData(null);
 		setError(null);
 		if (e.key === 'Enter' && e.target.value !== '') {
 			setInput(e.target.value);
